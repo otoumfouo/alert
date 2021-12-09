@@ -1,0 +1,250 @@
+[
+  {
+    "model": "event.Type_alert",
+    "pk": 1,
+    "fields": {
+      "libelle": "INFORMATION"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 2,
+    "fields": {
+      "libelle": "INONDATION"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 3,
+    "fields": {
+      "libelle": "EVENEMENT"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 4,
+    "fields": {
+      "libelle": "MAL EN POINT"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 5,
+    "fields": {
+      "libelle": "CORPS SANS VIE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 6,
+    "fields": {
+      "libelle": "VISITE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 7,
+    "fields": {
+      "libelle": "AGRESSION"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 8,
+    "fields": {
+      "libelle": "BRAQUAGE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 9,
+    "fields": {
+      "libelle": "MANIFESTATION"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 10,
+    "fields": {
+      "libelle": "BAGARRE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 11,
+    "fields": {
+      "libelle": "VOL"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 12,
+    "fields": {
+      "libelle": "CEREMONIE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 13,
+    "fields": {
+      "libelle": "INCENDIE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 14,
+    "fields": {
+      "libelle": "CARAMBOLAGE"
+    }
+  },{
+    "model": "event.Type_alert",
+    "pk": 15,
+    "fields": {
+      "libelle": "AVP"
+    }
+  },{
+    "model": "event.Type_degats",
+    "pk": 1,
+    "fields": {
+      "libelle": "Humain"
+    }
+  },{
+    "model": "event.Type_degats",
+    "pk": 2,
+    "fields": {
+      "libelle": "Materiel"
+    }
+  },{
+    "model": "event.Capteur_alert",
+    "pk": 1,
+    "fields": {
+      "libelle": "Video Surveillance"
+    }
+  },{
+    "model": "event.Capteur_alert",
+    "pk": 2,
+    "fields": {
+      "libelle": "Reseaux Sociaux"
+    }
+  },{
+    "model": "event.Capteur_alert",
+    "pk": 3,
+    "fields": {
+      "libelle": "Centre d'appel"
+    }
+  },{
+    "model": "event.Intervenants",
+    "pk": 1,
+    "fields": {
+      "nom": "POLICE"
+    }
+  },{
+    "model": "event.Intervenants",
+    "pk": 2,
+    "fields": {
+      "nom": "SAPEUR-POMPIER"
+    }
+  },{
+    "model": "event.Intervenants",
+    "pk": 3,
+    "fields": {
+      "nom": "GENDARMERIE"
+    }
+  },{
+    "model": "event.Intervenants",
+    "pk": 4,
+    "fields": {
+      "nom": "CIAT COMPETANT"
+    }
+  },{
+    "model": "event.Intervenants",
+    "pk": 5,
+    "fields": {
+      "nom": "PC RADIO"
+    }
+  },{
+    "model": "event.Region",
+    "pk": 1,
+    "fields": {
+      "nom": "GRAND-PONT"
+    }
+  },{
+    "model": "event.Departement",
+    "pk": 1,
+    "fields": {
+      "nom": "ABIDJAN",
+      "region": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 1,
+    "fields": {
+      "nom": "COCODY",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 2,
+    "fields": {
+      "nom": "Treichville",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 3,
+    "fields": {
+      "nom": "Marcory",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 4,
+    "fields": {
+      "nom": "Koumassi",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 5,
+    "fields": {
+      "nom": "Port-Bouet",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 6,
+    "fields": {
+      "nom": "Yopougon",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 7,
+    "fields": {
+      "nom": "Adjame",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 8,
+    "fields": {
+      "nom": "Abobo",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 9,
+    "fields": {
+      "nom": "Attecoubé",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 10,
+    "fields": {
+      "nom": "Bingerville",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 11,
+    "fields": {
+      "nom": "ANANI",
+      "departement": 1
+    }
+  },{
+    "model": "event.Commune",
+    "pk": 12,
+    "fields": {
+      "nom": "GONZAGUEVILLE",
+      "departement": 1
+    }
+  }
+]

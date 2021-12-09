@@ -1,0 +1,221 @@
+{% extends 'layouts/cork/sass/sass.html' %}
+{% load static %}
+
+ {% load widget_tweaks %}
+ {% load crispy_forms_tags %}
+{% block head-css %}
+    <link href="{% static 'sass/plugins/apex/apexcharts.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static 'sass/assets/css/dashboard/dash_2.css'%}" rel="stylesheet" type="text/css" class="dashboard-analytics" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sass/assets/css/elements/alert.css'%}">
+{% endblock %}
+{% block app-Title%}
+    <div class="page-header">
+        <div class="page-title">
+         <h3>Dashboard</h3>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+
+                <div class="row layout-top-spacing">
+
+                    <div class="col-xl-8 col-lg-7 col-12">
+                        <div class="alert alert-light-primary border-0 notification-alert" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <span class="text-dark">A new version of Cork Admin is available.</span> <a href="javascript:void(0)">Learn more</a> </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-5 col-12 layout-spacing text-right">
+
+                        <div class="notification-action-btns d-lg-block d-flex justify-content-between flex-sm-row flex-column">
+                            <button class="btn btn-primary  notification-action-btn mb-sm-0 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg> View Statistics </button>
+                            <button class="btn btn-dark  notification-action-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud mr-1"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg> Download Report </button>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-one">
+                            <div class="widget-heading">
+                                <h5 class="">Revenue</h5>
+                                <div class="task-action">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="pendingTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pendingTask" style="will-change: transform;">
+                                            <a class="dropdown-item" href="javascript:void(0);">Weekly</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">Monthly</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">Yearly</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="revenueMonthly"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-two">
+                            <div class="widget-heading">
+                                <h5 class="">Alert Par Source d'information</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div id="chart-2" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2021 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
+                </div>
+                <div class="footer-section f-section-2">
+                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block foot-javascript %}
+    <script src="{% static 'sass/plugins/apex/apexcharts.min.js'%}"></script>
+    <script src="{% static 'sass/assets/js/dashboard/dash_2.js'%}"></script>
+
+    <script>
+
+    function url(route, start, end) {
+                            var url = route;
+                            // url = url.replace('dash.number',dash.number);
+                            url = url.replace(':start',start.format("YYYY-MM-DD"));
+                            url = url.replace(':end',end.format("YYYY-MM-DD"));
+                            return url;
+                        }
+                 $.ajax({
+                        type:'GET',
+                        url: '{% url 'dash_pie' %}',
+                        success: function(response){
+                            console.log(response[0].label)
+                            console.log(response[0].series)
+                           var options = {
+                                      chart: {
+                                          type: 'donut',
+                                          width: 380
+                                      },
+                                      //colors: ['#2196f3', '#e2a03f', '#8738a7'],
+                                      dataLabels: {
+                                        enabled: false
+                                      },
+                                      legend: {
+                                          position: 'bottom',
+                                          horizontalAlign: 'center',
+                                          fontSize: '14px',
+                                          markers: {
+                                            width: 10,
+                                            height: 10,
+                                          },
+                                          itemMargin: {
+                                            horizontal: 0,
+                                            vertical: 8
+                                          }
+                                      },
+                                      plotOptions: {
+                                        pie: {
+                                          donut: {
+                                            size: '65%',
+                                            background: 'transparent',
+                                            labels: {
+                                              show: true,
+                                              name: {
+                                                show: true,
+                                                fontSize: '14px',
+                                                fontFamily: 'Nunito, sans-serif',
+                                                color: undefined,
+                                                offsetY: -10
+                                              },
+                                              value: {
+                                                show: true,
+                                                fontSize: '26px',
+                                                fontFamily: 'Nunito, sans-serif',
+                                                color: '20',
+                                                offsetY: 16,
+                                                formatter: function (val) {
+                                                  return val
+                                                }
+                                              },
+                                              total: {
+                                                show: true,
+                                                showAlways: true,
+                                                label: 'Total',
+                                                color: '#888ea8',
+                                                formatter: function (w) {
+                                                  return w.globals.seriesTotals.reduce( function(a, b) {
+                                                    return a + b
+                                                  }, 0)
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      stroke: {
+                                        show: true,
+                                        width: 25,
+                                      },
+                                      series: response[0].series,
+                                      labels: response[0].label,
+                                      responsive: [{
+                                          breakpoint: 1599,
+                                          options: {
+                                              chart: {
+                                                  width: '350px',
+                                                  height: '400px'
+                                              },
+                                              legend: {
+                                                  position: 'bottom'
+                                              }
+                                          },
+
+                                          breakpoint: 1439,
+                                          options: {
+                                              chart: {
+                                                  width: '250px',
+                                                  height: '390px'
+                                              },
+                                              legend: {
+                                                  position: 'bottom'
+                                              },
+                                              plotOptions: {
+                                                pie: {
+                                                  donut: {
+                                                    size: '65%',
+                                                  }
+                                                }
+                                              }
+                                          },
+                                      }]
+                                  }
+
+                                  var chart = new ApexCharts(
+                                      document.querySelector("#chart-2"),
+                                      options
+                                  );
+
+                                chart.render();
+
+                            alert(cData)
+                        }
+                    });
+
+    </script>
+{% endblock %}
