@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.auth.models import User # new
 
@@ -144,6 +146,9 @@ class Alert(models.Model):
                                     related_name="alert_org", null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        self.datedebut = self.datedebut
+        super(Alert, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.lieu

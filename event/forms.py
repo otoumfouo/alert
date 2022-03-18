@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import CharField, ModelForm, inlineformset_factory
@@ -22,6 +24,8 @@ class AlertsForm(ModelForm):
         self.fields['description'].widget.attrs.update({
             'placeholder':'1 VP - VGP"'
         })
+
+
 
 
 class degatForm(ModelForm):

@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from django.contrib.auth import views as auth_view
 from django.contrib.auth.decorators import login_required
+from rest_framework import routers
+router = routers.DefaultRouter()
+from event import views
+router.register(r'alert', views.AlertViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', auth_view.LoginView.as_view(), name='login'),
     path('fr/', include('event.urls')),  # Route de l'application events
+    path('fr/requi/', include('requisition.urls')),  # Route de l'application events
+    url('^api/', include(router.urls)),
 ]

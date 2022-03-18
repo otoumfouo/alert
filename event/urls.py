@@ -20,8 +20,8 @@ from event import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('event/', views.alertList, name='list'),
-    path('event/dash/pie', views.dash_pie, name='dash_pie'),
-    path('event/dash/line', views.dash_line, name='dash_line'),
+    path('event/dash/<start>/pie/<end>', views.dash_pie, name='dash_pie'),
+    path('event/dash/<start>/line/<end>', views.dash_line, name='dash_line'),
     path('event/create/', views.AlertCreateView.as_view(), name='create'),
     path('event/<int:pk>/update/', views.AlertUpdateView.as_view(), name='update'),
 ]

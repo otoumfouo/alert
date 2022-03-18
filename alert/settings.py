@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-x%yoiouv^e4!lw^@^gn_vn&(e2nn#zj80knrgwlb6qg4d-wp_w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'bootstrap4',
     'crispy_forms',
+    'dateutil',
+    'ajax_datatable',
+    'rest_framework_datatables',
     #custom app
     'core',
     'event',
+    'requisition',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
@@ -83,8 +87,12 @@ WSGI_APPLICATION = 'alert.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'alert',
+        'USER': 'postgres',
+        'PASSWORD': 'thinktwice',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -129,10 +137,24 @@ LOGIN_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
-)
+STATIC_ROOT = '/home/requi/alert/static/'
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static/'),
+#)
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_datatables.renderers.DatatablesRenderer',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_datatables.filters.DatatablesFilterBackend',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework_datatables.pagination.DatatablesPageNumberPagination',
+    'PAGE_SIZE': 50,
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

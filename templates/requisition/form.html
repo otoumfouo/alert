@@ -1,0 +1,219 @@
+{% extends 'layouts/cork/base.html' %}
+{% load static %}
+ {% load widget_tweaks %}
+ {% load crispy_forms_tags %}
+{% block head-css %}
+ <link href="{% static 'cork/assets/css/apps/invoice-add.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'cork/plugins/flatpickr/flatpickr.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static 'cork/plugins/flatpickr/custom-flatpickr.css'%}" rel="stylesheet" type="text/css">
+{% endblock %}
+   {% block app-Title%}
+       Gestion des Incidents
+   {% endblock %}
+{% block breadcrumb%}
+    <ol class="breadcrumb">
+       <li class="breadcrumb-item"><a href="{% url 'list' %}">Ajout / Modification </a></li>
+
+    </ol>
+{% endblock %}
+{% block content %}
+ <div id="content" class="main-content">
+ <form method="POST" action="" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+                <div class="row" style="margin-top: 10px">
+                                                 <div class="col-xl-7"></div>
+                                                 <div class="col-xl-5">
+                                                     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>  Annuler</button>
+                                                      <button type="submit" class="btn btn-outline-primary submit" id="save-create"><i class="fas fa-archive"></i>  Enregister & Nouveau</button>
+                                                      <button type="submit" class="btn btn-outline-success submit" id="save-close"><i class="fas fa-save"></i> Enregister</button>
+                                                 </div>
+                                             </div>
+
+            <div class="layout-px-spacing">
+
+                <div class="row invoice layout-top-spacing layout-spacing">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                        <div class="doc-container">
+
+                            <div class="row">
+                                <div class="col-xl-12">
+
+                                      <div class="invoice-content">
+
+                                        <div class="invoice-detail-body">
+
+                                            <div class="invoice-detail-title">
+
+                                                <div class="invoice-logo" >
+                                                    <h3 style="border-bottom: 1px solid #ccc">Declaration d'une requistion Numerique</h3>
+                                                    <small>
+                                                        Cette regroupe les informations du réquerant de l'actes.<br>
+                                                        Veuillez remplir avec précotions, vérifier plusieur fois
+                                                    </small>
+                                                </div>
+
+                                                <div class="invoice-title">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">{{ form.requerant|add_class:'form-control date'|as_crispy_field }}</div>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="invoice-detail-header">
+
+                                                <div class="row justify-content-between">
+                                                    <div class="col-xl-6 invoice-address-company">
+                                                        <div class="invoice-address-company-fields">
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    {{ form.num_requistion|add_class:'form-control form-control-sm'|as_crispy_field }}
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    {{ form.objet|add_class:'form-control form-control-sm'|as_crispy_field }}
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="col-xl-6 invoice-address-client">
+
+                                                        <div class="invoice-address-client-fields">
+
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    {{ form.date_demande|add_class:'form-control form-control-sm'|as_crispy_field }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+
+                                                                <div class="col-sm-12">
+                                                                    {{ form.dpll|add_class:'form-control date'|as_crispy_field }}
+                                                                </div>
+                                                            </div>
+
+
+                                                      </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+
+
+
+                                            <div class="invoice-detail-note">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12 align-self-center">
+
+                                                        <div class="form-group row invoice-note">
+
+                                                            <div class="col-sm-12">
+                                                                {{ form.commentaire|add_class:'form-control date'|as_crispy_field }}
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <div class="row" style="margin-top: 10px">
+                                                 <div class="col-xl-7"></div>
+                                                 <div class="col-xl-5">
+                                                     <button class="btn btn-danger">Annuler</button>
+                                                     <button class="btn btn-outline-primary">Enregister & Nouveau</button>
+                                                     <button class="btn btn-outline-success">Enregister & fermer</button>
+                                                 </div>
+                                             </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+ </form>
+
+
+        </div>
+        <!--  END CONTENT AREA  -->
+{% endblock %}
+
+{% block foot-javascript %}
+     <script src="{% static 'cork/plugins/flatpickr/flatpickr.js'%}"></script>
+     <script src="{% static 'cork/plugins/flatpickr/fr.js'%}"></script>
+<script src="{% static 'cork/assets/js/apps/invoice-add.js'%}"></script>
+    <script src="{% static 'formset/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $('.formset_row').formset({
+        addText: '<i class="fas fa-plus"> </i>Ajouter une Ligne',
+        addCssClass: "btn btn-secondary additem btn-sm",
+        deleteText: '<i class="fas fa-trash"> </i>',
+        prefix: 'form_set',
+        formTemplate: null,
+        added : function($row) {
+            //console.log($row)
+
+        }
+    });$('.formset_rows').formset({
+        addText: '<i class="fas fa-plus"> </i>Ajouter une Ligne',
+        addCssClass: "btn btn-outline-primary btn-rounded btn-sm",
+        deleteText: '<i class="fas fa-trash"> </i>',
+        //prefix: 'form_file_set',
+        formTemplate: null,
+        added : function($row) {
+            //console.log($row)
+
+        }
+    });
+
+    var currentDate = new Date();
+
+
+        var f1 = flatpickr(document.getElementById('datedebut'), {
+              defaultDate: currentDate,
+              enableTime: true,
+              dateFormat: "d/m/Y",
+                "locale": "fr"
+            });
+    </script>
+{% endblock %}

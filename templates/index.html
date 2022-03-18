@@ -1,59 +1,48 @@
-{% extends 'layouts/cork/sass/sass.html' %}
+{% extends 'layouts/cork/base.html' %}
 {% load static %}
 
  {% load widget_tweaks %}
  {% load crispy_forms_tags %}
 {% block head-css %}
-    <link href="{% static 'sass/plugins/apex/apexcharts.css'%}" rel="stylesheet" type="text/css">
-    <link href="{% static 'sass/assets/css/dashboard/dash_2.css'%}" rel="stylesheet" type="text/css" class="dashboard-analytics" />
+    <link href="{% static 'cork/plugins/apex/apexcharts.css'%}" rel="stylesheet" type="text/css">
+    <link href="{% static 'cork/assets/css/dashboard/dash_1.css'%}" rel="stylesheet" type="text/css" class="dashboard-analytics" />
     <link rel="stylesheet" type="text/css" href="{% static 'sass/assets/css/elements/alert.css'%}">
+     <link href="{% static 'sass/plugins/daterangepicker/daterangepicker.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sass/plugins/table/datatable/datatables.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sass/plugins/table/datatable/dt-global_style.css'%}">
+
 {% endblock %}
 {% block app-Title%}
-    <div class="page-header">
-        <div class="page-title">
-         <h3>Dashboard</h3>
+   Tableau de Bord
+{% endblock %}
+
+{% block button-action%}
+   <div class="notification-action-btns d-lg-block d-flex justify-content-between flex-sm-row flex-column">
+        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+              <i class="fas fa-calendar"></i>&nbsp;
+              <span></span> <i class="fa fa-caret-down"></i>
         </div>
-    </div>
+   </div>
 {% endblock %}
 {% block content %}
-    <div id="content" class="main-content">
-            <div class="layout-px-spacing">
-
-                <div class="row layout-top-spacing">
-
-                    <div class="col-xl-8 col-lg-7 col-12">
-                        <div class="alert alert-light-primary border-0 notification-alert" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <span class="text-dark">A new version of Cork Admin is available.</span> <a href="javascript:void(0)">Learn more</a> </div>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-5 col-12 layout-spacing text-right">
-
-                        <div class="notification-action-btns d-lg-block d-flex justify-content-between flex-sm-row flex-column">
-                            <button class="btn btn-primary  notification-action-btn mb-sm-0 mb-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg> View Statistics </button>
-                            <button class="btn btn-dark  notification-action-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud mr-1"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg> Download Report </button>
-                        </div>
-
-                    </div>
+     <div class="row layout-top-spacing">
 
                     <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-chart-one">
                             <div class="widget-heading">
-                                <h5 class="">Revenue</h5>
+                                <h5 class="">Alert par type et par source d'information</h5>
                                 <div class="task-action">
                                     <div class="dropdown">
                                         <a class="dropdown-toggle" href="#" role="button" id="pendingTask" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="pendingTask" style="will-change: transform;">
-                                            <a class="dropdown-item" href="javascript:void(0);">Weekly</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Monthly</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Yearly</a>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="widget-content">
-                                <div id="revenueMonthly"></div>
+                                <div id="alertMonthly"></div>
                             </div>
                         </div>
                     </div>
@@ -61,39 +50,130 @@
                     <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                         <div class="widget widget-chart-two">
                             <div class="widget-heading">
-                                <h5 class="">Alert Par Source d'information</h5>
+                                <h5 class="">Alert Par Source d'Information</h5>
                             </div>
                             <div class="widget-content">
-                                <div id="chart-2" class=""></div>
+                                <div id="source" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-table-three">
+
+                            <div class="widget-heading">
+                                <h5 class="">Alerts Recentes</h5>
+                            </div>
+
+                            <div class="widget-content">
+                                <div class="table-responsive">
+                                     <table id="invoice-list" class="table table-hover" style="width:100%" >
+                                <thead>
+                                    <tr>
+                                        <th class="checkbox-column"> Record no. </th>
+
+                                          <th>Source Information</th>
+                                        <th>Date & Heures </th>
+                                        <th>Evenement</th>
+                                        <th>Commune/Quatier</th>
+                                        <th>Description</th>
+
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                 <tbody>
+                                {% for alert in alerts %}
+                                    <tr>
+                                        <td class="checkbox-column"> 1 </td>
+
+                                        <td>
+                                            {{ alert.source_information.libelle }}
+                                        </td><td>
+                                            {{ alert.datedebut }}
+                                        </td>
+                                        <td>{{ alert.type.libelle }}</td>
+                                        <td>{{ alert.commune.nom }}/ <br>{{ alert.lieu }}</td>
+
+                                        <td>{{ alert.description }}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                                    <a class="dropdown-item action-edit" href="{% url 'update' alert.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>Edit</a>
+                                                    <a class="dropdown-item action-delete" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  {%  endfor %}
+                                </tbody>
+                            </table>
+                                </div>
                             </div>
                         </div>
                     </div>
 
 
 
-
-
-
                 </div>
-            </div>
 
-            <div class="footer-wrapper">
-                <div class="footer-section f-section-1">
-                    <p class="">Copyright © 2021 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
-                </div>
-                <div class="footer-section f-section-2">
-                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-                </div>
-            </div>
-        </div>
 {% endblock %}
 
 {% block foot-javascript %}
     <script src="{% static 'sass/plugins/apex/apexcharts.min.js'%}"></script>
-    <script src="{% static 'sass/assets/js/dashboard/dash_2.js'%}"></script>
-
+    <script src="{% static 'sass/plugins/moment/moment.min.js'%}"></script>
+    <script src="{% static 'sass/plugins/daterangepicker/daterangepicker.min.js'%}"></script>
+    <script src="{% static 'sass/plugins/moment/moment-with-locales.min.js'%}"></script>
+    <script src="{% static 'cork/assets/js/dashboard/dash_1.js'%}"></script>
+    <script src="{% static 'sass/plugins/table/datatable/datatables.js'%}"></script>
+    <script src="{% static 'sass/plugins/table/datatable/button-ext/dataTables.buttons.min.js'%}"></script>
     <script>
 
+       var invoiceList = $('#invoice-list').DataTable({
+    "dom": "<'inv-list-top-section'<'row'<'col-sm-12 col-md-6 d-flex justify-content-md-start justify-content-center'l<'dt-action-buttons align-self-center'B>><'col-sm-12 col-md-6 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3'f<'toolbar align-self-center'>>>>" +
+        "<'table-responsive'tr>" +
+        "<'inv-list-bottom-section d-sm-flex justify-content-sm-between text-center'<'inv-list-pages-count  mb-sm-0 mb-3'i><'inv-list-pagination'p>>",
+
+    headerCallback:function(e, a, t, n, s) {
+        e.getElementsByTagName("th")[0].innerHTML='<label class="new-control new-checkbox checkbox-primary m-auto">\n<input type="checkbox" class="new-control-input chk-parent select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
+    },
+    columnDefs:[ {
+        targets:0,
+        width:"30px",
+        className:"",
+        orderable:!1,
+        render:function(e, a, t, n) {
+            return'<label class="new-control new-checkbox checkbox-primary  m-auto">\n<input type="checkbox" class="new-control-input child-chk select-customers-info" id="customer-all-info">\n<span class="new-control-indicator"></span><span style="visibility:hidden">c</span>\n</label>'
+        },
+    }],
+    buttons: [
+        {
+            text: 'Ajouter un Evenement',
+            className: 'btn btn-primary btn-sm',
+            action: function(e, dt, node, config ) {
+                window.location = '{% url 'create' %}';
+            }
+        }
+    ],
+    "order": [[ 1, "asc" ]],
+    "oLanguage": {
+        "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+        "sInfo": "Showing page _PAGE_ of _PAGES_",
+        "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+        "sSearchPlaceholder": "Search...",
+        "sLengthMenu": "Results :  _MENU_",
+    },
+    "stripeClasses": [],
+    "lengthMenu": [7, 10, 20, 50],
+    "pageLength": 7
+});
+    moment.locale("fr")
+                /*let start = moment().subtract(29, 'days');
+                let end = moment();*/
+                let start = moment().startOf('year');
+                let end = moment();
     function url(route, start, end) {
                             var url = route;
                             // url = url.replace('dash.number',dash.number);
@@ -101,12 +181,253 @@
                             url = url.replace(':end',end.format("YYYY-MM-DD"));
                             return url;
                         }
-                 $.ajax({
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+         $.ajax({
                         type:'GET',
-                        url: '{% url 'dash_pie' %}',
+                        url: url('{% url 'dash_line' ':start' ':end' %}',start, end ),
                         success: function(response){
-                            console.log(response[0].label)
-                            console.log(response[0].series)
+
+                            result = [];
+                            for( i in response) {
+
+                                result.push( {
+                                    'name':response[i].name,
+                                    'data':response[i].data,
+
+                                })
+                            }
+
+
+                            var options1 = {
+                                            chart: {
+                                              fontFamily: 'Nunito, sans-serif',
+                                              height: 365,
+                                              type: 'area',
+                                              zoom: {
+                                                  enabled: false
+                                              },
+                                              dropShadow: {
+                                                enabled: true,
+                                                opacity: 0.2,
+                                                blur: 10,
+                                                left: -7,
+                                                top: 22
+                                              },
+                                              toolbar: {
+                                                show: false
+                                              },
+                                              events: {
+                                                mounted: function(ctx, config) {
+                                                  const highest1 = ctx.getHighestValueInSeries(0);
+                                                  const highest2 = ctx.getHighestValueInSeries(1);
+
+                                                  ctx.addPointAnnotation({
+                                                    x: new Date(ctx.w.globals.seriesX[0][ctx.w.globals.series[0].indexOf(highest1)]).getTime(),
+                                                    y: highest1,
+                                                    label: {
+                                                      style: {
+                                                        cssClass: 'd-none'
+                                                      }
+                                                    },
+                                                    customSVG: {
+                                                        SVG: '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#1b55e2" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>',
+                                                        cssClass: undefined,
+                                                        offsetX: -8,
+                                                        offsetY: 5
+                                                    }
+                                                  })
+
+                                                  ctx.addPointAnnotation({
+                                                    x: new Date(ctx.w.globals.seriesX[1][ctx.w.globals.series[1].indexOf(highest2)]).getTime(),
+                                                    y: highest2,
+                                                    label: {
+                                                      style: {
+                                                        cssClass: 'd-none'
+                                                      }
+                                                    },
+                                                    customSVG: {
+                                                        SVG: '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#e7515a" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>',
+                                                        cssClass: undefined,
+                                                        offsetX: -8,
+                                                        offsetY: 5
+                                                    }
+                                                  })
+                                                },
+                                              }
+                                            },
+                                            //colors: ['#1b55e2', '#e7515a'],
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            markers: {
+                                              discrete: [{
+                                              seriesIndex: 0,
+                                              dataPointIndex: 7,
+                                              fillColor: '#000',
+                                              strokeColor: '#000',
+                                              size: 5
+                                            }, {
+                                              seriesIndex: 2,
+                                              dataPointIndex: 11,
+                                              fillColor: '#000',
+                                              strokeColor: '#000',
+                                              size: 4
+                                            }]
+                                            },
+                                            subtitle: {
+                                              text: response[0].total,
+                                              align: 'left',
+                                              margin: 0,
+                                              offsetX: 95,
+                                              offsetY: 0,
+                                              floating: false,
+                                              style: {
+                                                fontSize: '18px',
+                                                color:  '#4361ee'
+                                              }
+                                            },
+                                            title: {
+                                              text: 'Total Alert',
+                                              align: 'left',
+                                              margin: 0,
+                                              offsetX: -10,
+                                              offsetY: 0,
+                                              floating: false,
+                                              style: {
+                                                fontSize: '18px',
+                                                color:  '#0e1726'
+                                              },
+                                            },
+                                            stroke: {
+                                                show: true,
+                                                curve: 'smooth',
+                                                width: 2,
+                                                lineCap: 'square'
+                                            },
+                                            series: result,
+                                            labels: response[0].axies,
+                                            xaxis: {
+                                              axisBorder: {
+                                                show: false
+                                              },
+                                              axisTicks: {
+                                                show: false
+                                              },
+                                              crosshairs: {
+                                                show: true
+                                              },
+                                              labels: {
+                                                offsetX: 0,
+                                                offsetY: 5,
+                                                style: {
+                                                    fontSize: '12px',
+                                                    fontFamily: 'Nunito, sans-serif',
+                                                    cssClass: 'apexcharts-xaxis-title',
+                                                },
+                                              }
+                                            },
+                                            yaxis: {
+                                              labels: {
+                                                formatter: function(value, index) {
+                                                  return (value)
+                                                },
+                                                offsetX: -22,
+                                                offsetY: 0,
+                                                style: {
+                                                    fontSize: '12px',
+                                                    fontFamily: 'Nunito, sans-serif',
+                                                    cssClass: 'apexcharts-yaxis-title',
+                                                },
+                                              }
+                                            },
+                                            grid: {
+                                              borderColor: '#e0e6ed',
+                                              strokeDashArray: 5,
+                                              xaxis: {
+                                                  lines: {
+                                                      show: true
+                                                  }
+                                              },
+                                              yaxis: {
+                                                  lines: {
+                                                      show: false,
+                                                  }
+                                              },
+                                              padding: {
+                                                top: 0,
+                                                right: 0,
+                                                bottom: 0,
+                                                left: -10
+                                              },
+                                            },
+                                            legend: {
+                                              position: 'top',
+                                              horizontalAlign: 'right',
+                                              offsetY: -50,
+                                              fontSize: '16px',
+                                              fontFamily: 'Nunito, sans-serif',
+                                              markers: {
+                                                width: 10,
+                                                height: 10,
+                                                strokeWidth: 0,
+                                                strokeColor: '#fff',
+                                                fillColors: undefined,
+                                                radius: 12,
+                                                onClick: undefined,
+                                                offsetX: 0,
+                                                offsetY: 0
+                                              },
+                                              itemMargin: {
+                                                horizontal: 0,
+                                                vertical: 20
+                                              }
+                                            },
+                                            tooltip: {
+                                              theme: 'dark',
+                                              marker: {
+                                                show: true,
+                                              },
+                                              x: {
+                                                show: false,
+                                              }
+                                            },
+                                            fill: {
+                                                type:"gradient",
+                                                gradient: {
+                                                    type: "vertical",
+                                                    shadeIntensity: 1,
+                                                    inverseColors: !1,
+                                                    opacityFrom: .28,
+                                                    opacityTo: .05,
+                                                    stops: [45, 100]
+                                                }
+                                            },
+                                            responsive: [{
+                                              breakpoint: 575,
+                                              options: {
+                                                legend: {
+                                                    offsetY: -30,
+                                                },
+                                              },
+                                            }]
+                                }
+
+
+
+
+                             var chart1 = new ApexCharts(
+                                document.querySelector("#alertMonthly"),
+                                options1
+                                );
+
+                            chart1.render();
+
+                                $.ajax({
+                        type:'GET',
+                        url: url('{% url 'dash_pie' ':start' ':end' %}',start, end ),
+                        success: function(response){
+
                            var options = {
                                       chart: {
                                           type: 'donut',
@@ -207,15 +528,77 @@
                                   }
 
                                   var chart = new ApexCharts(
-                                      document.querySelector("#chart-2"),
+                                      document.querySelector("#source"),
                                       options
                                   );
+                            chart.render();
 
-                                chart.render();
+
+
+
+
+
 
                             alert(cData)
                         }
                     });
+
+                        }
+                    });
+    }
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        "locale": {
+                    "format": "MM/DD/YYYY",
+                    "separator": " - ",
+                    "applyLabel": "Appliquer",
+                    "cancelLabel": "Annuler",
+                    "fromLabel": "de",
+                    "toLabel": "a",
+                    "customRangeLabel": "Personaliser",
+                    "daysOfWeek": [
+                        "Dim",
+                        "Lun",
+                        "Mar",
+                        "Mer",
+                        "Jeu",
+                        "Ven",
+                        "Sam"
+                    ],
+                    "monthNames": [
+                        "Janvier",
+                        "Fevrier",
+                        "Mars",
+                        "Avril",
+                        "Mai",
+                        "Juin",
+                        "Juillet",
+                        "Aout",
+                        "Septembre",
+                        "Octobre",
+                        "Novembre",
+                        "Decembre"
+                    ],
+                    "firstDay": 1
+        },
+        ranges: {
+            "Jusqu 'aujourd'hui": [moment().startOf('year'), moment()],
+            "Aujourd'hui": [moment(), moment()],
+           'Hier': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'les 7 Derniers Jours': [moment().subtract(6, 'days'), moment()],
+           'les 30 Derniers Jours': [moment().subtract(29, 'days'), moment()],
+           'Ce Mois': [moment().startOf('month'), moment().endOf('month')],
+           'le Mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+           'Année en Cours': [moment().startOf('year'), moment().endOf('year')],
+           'An derniers': [moment().subtract(1, 'years'), new Date()],
+           'Il y a deux ans': [moment().subtract(2, 'years'), new Date()],
+           'Il y a trois(3) ans': [moment().subtract('years', 3), new Date()]
+        }
+    }, cb);
+    cb(start, end);
+
+
 
     </script>
 {% endblock %}
